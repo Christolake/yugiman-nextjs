@@ -1,12 +1,13 @@
 'use client'
 
-import data from "./data";
 import type { yugicard } from "../types/yugicard";
 import {  Table,  TableHeader,  TableBody,  TableColumn,  TableRow,  TableCell, getKeyValue} from "@nextui-org/table";
 import {User} from "@nextui-org/user";
 import {Chip} from "@nextui-org/chip";
 import {Tooltip} from "@nextui-org/tooltip";
 import { useState, useCallback } from 'react';
+import useCardsInDeck from "../hooks/useCardsInDeck";
+import { data } from "autoprefixer";
 
 const MONSTERS_WITH_QUESTION_STAT = [
     {
@@ -29,7 +30,7 @@ const MONSTERS_WITH_QUESTION_STAT = [
     {key: "def", label: "DEF"},
   ];
 
-  export default function DeckList() {
+  export default function DeckList(props: {data: string}) {
 
 
     const renderCell = useCallback((card: yugicard, columnKey: React.Key) => {
@@ -79,7 +80,10 @@ const MONSTERS_WITH_QUESTION_STAT = [
         return cellValue;
     }
         }, []);
-    const [decks, setDecks] = useState<yugicard[]>(data)
+
+    const decks: yugicard[] = useCardsInDeck(props.data)
+
+    console.log(decks)
 
     return (
     <Table aria-label='Cards in the Decklist'>
