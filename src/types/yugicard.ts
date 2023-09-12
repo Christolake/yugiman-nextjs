@@ -18,4 +18,6 @@ export type yugicard = {
     banlist_info?: any,
     card_images?: any,
     card_prices?: any
+    misc?: any,
+    souce?: string,
   }

@@ -16,6 +16,10 @@
   }
 }
 
+/* * {
+  border: solid 1px lime;
+} */
+
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(

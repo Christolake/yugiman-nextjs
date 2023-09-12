@@ -1,26 +1,39 @@
 'use client'
 
 import DeckList from "@/components/DeckList";
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Input } from "@nextui-org/react";
+import {Image} from "@nextui-org/image";
+import {  Dropdown,  DropdownTrigger,  DropdownMenu,  DropdownSection,  DropdownItem} from "@nextui-org/dropdown";
+import { Button } from "@nextui-org/button";
 import { GiMagnifyingGlass } from "react-icons/gi"
+import CHARACTERS from "../test/CHARACTERS";
+import useDeckList from "@/hooks/useDeckList";
+
 
 export default function Collections () {
 
-    const [value, setValue] = useState('')
+  //TODO : Buscar en Wiki Sections=0 el anime_deck    = [['arquetipo']] y hacerle fetch en ygoPro.
+
+  const [value, setValue] = useState<any>('')
 
     return(
-        <div className="w-full flex flex-col gap-2 max-w-[240px]">
-        <Input
-          label="Search"
-          placeholder="Search character..."
-          value={value}
-          onValueChange={setValue}
-          startContent={
-            <GiMagnifyingGlass className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
-          }
-          />
-          <p className="text-default-500 text-small">Input value: {value}</p>
-        </div>
+        <div className="w-full flex flex-col gap-2 justify-center items-center ">
+          <Dropdown>
+      <DropdownTrigger>
+        <Button 
+          variant="bordered" 
+        >
+          Select Character
+        </Button>
+      </DropdownTrigger>
+      <DropdownMenu 
+      aria-label="Static Actions"
+      onAction={(key) => setValue(key)}>
+        {CHARACTERS.map(e => <DropdownItem key={e.name}>{e.name}</DropdownItem> )}
+      </DropdownMenu>
+    </Dropdown>
+          <DeckList data={useDeckList(value)} />
+        </div >
     )
 }
