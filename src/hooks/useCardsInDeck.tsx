@@ -88,15 +88,21 @@ export default function useCardsInDeck(initialValue: {[key:string]:string|number
         searchCard[index]!=undefined? searchCard[index] += decksRaw[key].join('|')+'|': searchCard[index] = decksRaw[key].join('|')+'|'
        })
        const allCards:string[] = [...new Set(Object.values(decksRaw).flat().sort())]
+       let comparing:string[] = [];
+       let difference:string[] = [];
 
     console.log(allCards)
        const fetchYgopro = async () => {
         await fetch(ygopro+page.cardName+allCards.join('|'))
         .then(res => res.json())
         .then(json => dataYgopro = json.data)
+        .then(() => dataYgopro.map(e => comparing.push(e.name)))
+        .then(() => difference = allCards.filter(e => !comparing.includes(e)))
+        .then(() => console.log({allCards: allCards, comparing: comparing, difference: difference}))
         .finally(() => setData(dataYgopro))
     } 
     fetchYgopro()
     }, [value])
+    
     return data
 }

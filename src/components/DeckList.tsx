@@ -68,7 +68,7 @@ export default function DeckList(props: { data: string | undefined }) {
       case "name":
         return (
           <User
-            avatarProps={{ radius: "lg", src: card.card_images[0].image_url_cropped, classNames: {img: "object-top"} }}
+            // avatarProps={{ radius: "lg", src: card.card_images[0].image_url_cropped, classNames: {img: "object-top"} }}
             description={card.type}
             name={cellValue}
             classNames={{description: card.type?.includes('Pendulum')?'text-spell':''}}

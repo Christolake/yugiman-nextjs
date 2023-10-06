@@ -26,7 +26,7 @@ const CHARACTERS: character[] = [
         id: 74677422,
         role: 'main friend',
     },
-    {   name: 'Marik Ishtar',
+    {   name: 'Yami Marik',
         alter: 'Yami Marik',
         alterJapanese: 'Dark Marik',
         series: 1,
